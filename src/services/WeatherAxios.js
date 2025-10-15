@@ -11,9 +11,10 @@ export const fetchWeather = (lat, lon, date) => {
 
   return axios.get(BASE_URL, {
     params: {
-      latitude: lat,
+     latitude: lat,
       longitude: lon,
-      hourly: 'temperature_2m,weathercode',
+      hourly: 'temperature_2m,precipitation,cloudcover,relative_humidity_2m,wind_speed_10m,weathercode',
+      daily: 'temperature_2m_max,temperature_2m_min,sunrise,sunset',
       start_date: date,
       end_date: date,
       timezone: 'auto',
