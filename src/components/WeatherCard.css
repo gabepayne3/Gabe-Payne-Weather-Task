@@ -1,0 +1,15 @@
+.weather-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 20px auto;
+  background: #f8f8f8;
+}
+
+.hourly-weather {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
