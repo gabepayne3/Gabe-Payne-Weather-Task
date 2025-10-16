@@ -2,7 +2,7 @@
   text-align: center;
   padding: 20px;
   font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
+  background-color: #b8c0c8;
   min-height: 100vh;
 }
 
@@ -25,4 +25,25 @@ input[type="date"] {
 
 h1 {
   font-family: "starWars";
+}
+
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+
+.date-label-line {
+  display: block;
+  margin: 1rem 0 0.5rem;
+  font-weight: 500;
+  color: #555;
+  text-align: center;
 }

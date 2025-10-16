@@ -32,7 +32,7 @@ const WeatherCard = ({ data, date }) => {
 
   return (
     <section className="weather-card" aria-labelledby="weather-heading">
-      <h2 id="weather-heading">Weather Forecast for your location</h2>
+      <h2 id="weather-heading">Weather Forecast For Your Location</h2>
 
       <ul className="daily-summary">
         <li>Max Temp: {temperature_2m_max?.[dailyIndex]}°C</li>
@@ -46,11 +46,21 @@ const WeatherCard = ({ data, date }) => {
         {hourlyData.map(({ time, index }) => (
           <li className="hourly-item" key={time}>
             <p><strong>{time.slice(11, 16)}</strong></p>
-            <p>🌡️ Temp: {temperature_2m?.[index]}°C</p>
-            <p>🌧️ Precip: {precipitation?.[index]} mm</p>
-            <p>☁️ Cloud: {cloudcover?.[index]}%</p>
-            <p>💧 Humidity: {relative_humidity_2m?.[index]}%</p>
-            <p>💨 Wind: {wind_speed_10m?.[index]} km/h</p>
+            <p>
+              <span role="img" aria-label="Temperature">🌡️</span> Temp: {temperature_2m?.[index]}°C
+            </p>
+            <p>
+              <span role="img" aria-label="Precipitation">🌧️</span> Precip: {precipitation?.[index]} mm
+            </p>
+            <p>
+              <span role="img" aria-label="Cloud cover">☁️</span> Cloud: {cloudcover?.[index]}%
+            </p>
+            <p>
+              <span role="img" aria-label="Humidity">💧</span> Humidity: {relative_humidity_2m?.[index]}%
+            </p>
+            <p>
+              <span role="img" aria-label="Wind speed">💨</span> Wind: {wind_speed_10m?.[index]} km/h
+            </p>
           </li>
         ))}
       </ul>
