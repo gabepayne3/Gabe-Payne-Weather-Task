@@ -1,12 +1,15 @@
 .weather-card {
   font-family: sans-serif;
-  max-width: 800px;
+  max-width: 900px;
   margin: 2rem auto;
-  padding: 1.5rem;
+  padding: 2rem;
   background: #f9f9f9;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  text-align: center;
 }
+
 
 .weather-card h2,
 .weather-card h3 {
@@ -14,48 +17,54 @@
   color: #333;
 }
 
-.weather-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
-/* DAILY SUMMARY STYLE */
 .daily-summary {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2rem;
+  padding: 0;
+  list-style: none;
 }
 
 .daily-summary li {
   background: #fff;
   padding: 0.75rem 1rem;
   border: 1px solid #ddd;
-  border-radius: 6px;
-  min-width: 120px;
+  border-radius: 8px;
+  min-width: 130px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+
 .hourly-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1rem;
-  margin-top: 1rem;
+  justify-items: center;
+  align-items: start;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  max-width: 100%;
 }
 
-.hourly-item {
+
+.hourly-list > li {
   background: #fff;
   padding: 1rem;
-  border-radius: 6px;
-  border: 1px solid #eee;
+  border-radius: 8px;
+  border: 1px solid #ddd;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  width: 150px; 
+  width: 100%;
+  max-width: 160px;
   box-sizing: border-box;
+  text-align: left;
 }
-
 
 .hourly-item p {
   margin: 0.25rem 0;
+  font-size: 0.9rem;
   color: #444;
 }

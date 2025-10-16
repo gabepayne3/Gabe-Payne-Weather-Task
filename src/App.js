@@ -3,60 +3,53 @@ import { fetchWeather } from './services/WeatherAxios';
 import WeatherCard from './components/WeatherCard';
 import './App.css';
 
-function getToday() {
-  return new Date().toISOString().split('T')[0];
-}
-
-function getMaxForecastDate() {
-  const date = new Date();
-  date.setDate(date.getDate() + 16);
-  return date.toISOString().split('T')[0];
-}
-
 const App = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [selectedDate, setSelectedDate] = useState(getToday());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [location, setLocation] = useState({ lat: 53.5415, lon: -2.0050 }); // Default location
 
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
+  function getToday() {
+    const date = new Date();
+    return date.toISOString().split('T')[0];
+  }
 
+  // Get user's location on mount
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setLat(pos.coords.latitude);
-          setLon(pos.coords.longitude);
+        (position) => {
+          setLocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
         },
         () => {
-          setError("Location access denied. Using default location.");
-          setLat(53.5415);
-          setLon(-2.0050);
+          // If permission denied or error, keep default location
+          console.warn('Geolocation permission denied or unavailable.');
         }
       );
-    } else {
-      setError("Geolocation not supported by browser.");
     }
   }, []);
 
+  // Fetch weather data when location or date changes
   useEffect(() => {
-    if (!lat || !lon || !selectedDate) return;
-
     setLoading(true);
     setError(null);
 
-    fetchWeather(lat, lon, selectedDate)
+    fetchWeather(location.lat, location.lon, selectedDate)
       .then((res) => {
         setWeatherData(res.data);
       })
       .catch(() => {
         setError('Failed to fetch weather data');
+        setWeatherData(null);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [lat, lon, selectedDate]);
+  }, [location, selectedDate]);
 
   return (
     <div className="App">
@@ -65,7 +58,7 @@ const App = () => {
         type="date"
         value={selectedDate}
         min="1979-01-01"
-        max={getMaxForecastDate()}
+        max={getToday()}
         onChange={(e) => setSelectedDate(e.target.value)}
       />
       {loading && <p>Loading...</p>}
