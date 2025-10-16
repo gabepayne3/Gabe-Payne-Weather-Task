@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# 🌦️ Weather Forecast App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple and accessible React application that uses the **Open-Meteo Weather API** to display weather forecasts and historical weather data for the user’s current location.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- Fetches live and historical weather data from the **Open-Meteo API**.  
+- Uses the browser’s **geolocation** to automatically detect the user’s location.  
+- Allows users to **select any date** from **January 1, 1979** up to **15 days into the future**.  
+- Displays both **daily summaries** (max/min temperature, sunrise, sunset) and **hourly forecasts** (temperature, precipitation, humidity, cloud cover, wind).  
+- Fully **accessible**, including screen-reader-friendly emojis and labeled form controls.  
+- Responsive design with animated hover effects and clean layout.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🧭 Preview
 
-### `npm test`
+Users can:  
+1. See their **current location’s weather forecast**.  
+2. Pick a **specific date** using the date picker to view historical or upcoming weather.  
+3. Explore **hourly conditions** for the chosen date.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Installation & Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Follow these steps to clone and run the project locally:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/weather-forecast-app.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Navigate into the project folder
 
-### `npm run eject`
+cd weather-forecast-app
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Install dependencies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+(Or use yarn install if you prefer yarn.)
+4. Start the development server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+npm start
 
-## Learn More
+This will open the app in your default browser at:
+👉 http://localhost:3000
+⚙️ Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+weather-forecast-app/
+│
+├── src/
+│   ├── components/
+│   │   └── WeatherCard.jsx
+│   ├── services/
+│   │   └── WeatherAxios.js
+│   ├── App.jsx
+│   ├── App.css
+│   └── index.js
+│
+├── public/
+│   └── index.html
+│
+└── README.md
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+🌤️ How It Works
 
-### Code Splitting
+    On load, the app requests geolocation permission to get the user’s coordinates.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    It calls the Open-Meteo API to fetch daily and hourly weather data for that location.
 
-### Analyzing the Bundle Size
+    The selected date (default: today) determines which day’s data is shown.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    Users can choose any past or future date (from 1979 to +15 days ahead).
 
-### Making a Progressive Web App
+    Results are displayed in a clean, card-style interface with hover animations and accessible emoji labels.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🔗 API Reference
 
-### Advanced Configuration
+This app uses the free and public Open-Meteo API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+, which requires no authentication.
+💡 Accessibility
 
-### Deployment
+    All emojis include descriptive aria-labels for screen readers.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    The date picker has a labeled input field for clarity.
 
-### `npm run build` fails to minify
+    The layout adapts to various screen sizes with consistent spacing and shadows.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🧩 Technologies Used
+
+    React – for the UI
+
+    Axios – for API requests
+
+    CSS – for styling and hover animations
+
+    Open-Meteo API – for weather data
+
+🧑‍💻 Author
+
+Developed by Gabe Payne
+Feel free to fork this repo or open an issue for suggestions and improvements!
