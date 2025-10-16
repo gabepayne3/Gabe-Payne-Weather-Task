@@ -37,28 +37,28 @@ Explore hourly conditions for the chosen date.
 Follow these steps to clone and run the project locally:
 
 1. Clone the repository
-
+```
 git clone https://github.com/gabepayne3/Gabe-Payne-Weather-Task.git
-
+```
 2. Navigate into the project folder
-
+```
 cd Gabe-Payne-Weather-Task
-
+```
 3. Install dependencies
-
+```
 npm install
-
+```
 4. Start the development server
-
+```
 npm start
-
+```
 This will open the app in your default browser at:
 👉 http://localhost:3000
 
 ---
 
 ⚙️ Project Structure
-
+```
 weather-forecast-app/
 │
 ├── src/
@@ -74,7 +74,7 @@ weather-forecast-app/
 │   └── index.html
 │
 └── README.md
-
+```
 ---
 
 🌤️ How It Works
