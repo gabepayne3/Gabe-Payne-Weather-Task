@@ -16,3 +16,13 @@ input[type="date"] {
   color: red;
   font-weight: bold;
 }
+
+@font-face {
+  font-family: "starwars";
+  src: url('./fonts/Starjedi.ttf') format("truetype");
+}
+
+
+h1 {
+  font-family: "starWars";
+}

@@ -3,17 +3,25 @@ import { fetchWeather } from './services/WeatherAxios';
 import WeatherCard from './components/WeatherCard';
 import './App.css';
 
+
+function getToday() {
+  return new Date().toISOString().split('T')[0]; 
+}
+
+function getMaxForecastDate() {
+  const date = new Date();
+  date.setDate(date.getDate() + 16);
+  return date.toISOString().split('T')[0];
+}
+
 const App = () => {
   const [weatherData, setWeatherData] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(getToday());
+  const [selectedDate, setSelectedDate] = useState(getToday()); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const lat = 53.5415 
-  const lon = -2.0050
-   function getToday() {
-    return new Date().toISOString().split('T')[0];
-  }
+  const lat = 53.5415;
+  const lon = -2.0050;
 
   useEffect(() => {
     setLoading(true);
@@ -33,11 +41,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>🌤️ Weather Forecast</h1>
+      <h1>Weather Forecast</h1>
       <input
         type="date"
         value={selectedDate}
-        max={getToday()}
+        min="1979-01-01"
+        max={getMaxForecastDate()}
         onChange={(e) => setSelectedDate(e.target.value)}
       />
       {loading && <p>Loading...</p>}
