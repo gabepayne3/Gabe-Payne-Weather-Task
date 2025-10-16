@@ -3,9 +3,8 @@ import { fetchWeather } from './services/WeatherAxios';
 import WeatherCard from './components/WeatherCard';
 import './App.css';
 
-
 function getToday() {
-  return new Date().toISOString().split('T')[0]; 
+  return new Date().toISOString().split('T')[0];
 }
 
 function getMaxForecastDate() {
@@ -16,14 +15,34 @@ function getMaxForecastDate() {
 
 const App = () => {
   const [weatherData, setWeatherData] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(getToday()); 
+  const [selectedDate, setSelectedDate] = useState(getToday());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const lat = 53.5415;
-  const lon = -2.0050;
+  const [lat, setLat] = useState(null);
+  const [lon, setLon] = useState(null);
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setLat(pos.coords.latitude);
+          setLon(pos.coords.longitude);
+        },
+        () => {
+          setError("Location access denied. Using default location.");
+          setLat(53.5415);
+          setLon(-2.0050);
+        }
+      );
+    } else {
+      setError("Geolocation not supported by browser.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!lat || !lon || !selectedDate) return;
+
     setLoading(true);
     setError(null);
 
@@ -37,7 +56,7 @@ const App = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [selectedDate]);
+  }, [lat, lon, selectedDate]);
 
   return (
     <div className="App">

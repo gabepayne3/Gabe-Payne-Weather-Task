@@ -1,18 +1,24 @@
-import React from 'react';
+
 import './WeatherCard.css';
+import React from 'react';
 
 const WeatherCard = ({ data, date }) => {
+  if (!data || !data.daily || !data.hourly) return null;
+
   const { daily, hourly } = data;
 
   const {
     temperature_2m_max,
     temperature_2m_min,
     sunrise,
-    sunset
+    sunset,
+    precipitation_sum,
+    weathercode,
+    time: dailyTime
   } = daily;
 
   const {
-    time,
+    time: hourlyTime,
     temperature_2m,
     precipitation,
     cloudcover,
@@ -20,31 +26,51 @@ const WeatherCard = ({ data, date }) => {
     wind_speed_10m
   } = hourly;
 
+ 
+  const dailyIndex = dailyTime.indexOf(date);
+  if (dailyIndex === -1) return <p>No daily data available for {date}.</p>;
+
+ 
+  const hourlyData = hourlyTime
+    .map((t, i) => ({ time: t, index: i }))
+    .filter((entry) => entry.time.startsWith(date));
+
   return (
-    <div className="weather-card">
-      <h2>Weather Forecast for {date}</h2>
+    <section aria-labelledby="weather-heading">
+      <h2 id="weather-heading">Weather Forecast for {date}</h2>
 
-      <div className="daily-summary">
-        <p><strong>High:</strong> {temperature_2m_max[0]}°C</p>
-        <p><strong>Low:</strong> {temperature_2m_min[0]}°C</p>
-        <p><strong>Sunrise:</strong> {sunrise[0].slice(11)}</p>
-        <p><strong>Sunset:</strong> {sunset[0].slice(11)}</p>
-      </div>
+      <ul>
+        <li>
+          <strong>Daily Summary:</strong>
+          <ul>
+            <li>Max Temp: {temperature_2m_max?.[dailyIndex]}°C</li>
+            <li>Min Temp: {temperature_2m_min?.[dailyIndex]}°C</li>
+            <li>Sunrise: {sunrise?.[dailyIndex]?.slice(11)}</li>
+            <li>Sunset: {sunset?.[dailyIndex]?.slice(11)}</li>
+            <li>Precipitation: {precipitation_sum?.[dailyIndex]} mm</li>
+            <li>Weather Code: {weathercode?.[dailyIndex]}</li>
+          </ul>
+        </li>
 
-      <h3>Hourly Forecast</h3>
-      <div className="hourly-list">
-        {time.map((t, i) => (
-          <div className="hourly-item" key={i}>
-            <p><strong>{t.slice(11, 16)}</strong></p>
-            <p>🌡️ {temperature_2m[i]}°C</p>
-            <p>🌧️ {precipitation[i]} mm</p>
-            <p>☁️ {cloudcover[i]}%</p>
-            <p>💧 {relative_humidity_2m[i]}%</p>
-            <p>💨 {wind_speed_10m[i]} km/h</p>
-          </div>
-        ))}
-      </div>
-    </div>
+        <li>
+          <strong>Hourly Forecast:</strong>
+          <ul>
+            {hourlyData.map(({ time, index }) => (
+              <li key={time}>
+                <ul>
+                  <li><strong>{time.slice(11, 16)}</strong></li>
+                  <li>🌡️ Temp: {temperature_2m?.[index]}°C</li>
+                  <li>🌧️ Precip: {precipitation?.[index]} mm</li>
+                  <li>☁️ Cloud Cover: {cloudcover?.[index]}%</li>
+                  <li>💧 Humidity: {relative_humidity_2m?.[index]}%</li>
+                  <li>💨 Wind Speed: {wind_speed_10m?.[index]} km/h</li>
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </li>
+      </ul>
+    </section>
   );
 };
 
